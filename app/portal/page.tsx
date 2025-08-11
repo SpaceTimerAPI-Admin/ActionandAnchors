@@ -21,6 +21,12 @@ export default function Portal(){
   const [loading,setLoading]=useState(true)
   const [error,setError]=useState<string|null>(null)
 
+  const signOut = async () => {
+    const supa = supabaseBrowser()
+    await supa.auth.signOut()
+    router.push('/login')
+  }
+
   useEffect(()=>{
     const load = async () => {
       const supa = supabaseBrowser()
@@ -29,7 +35,7 @@ export default function Portal(){
       setEmail(session.user.email)
       const { data, error } = await supa.from('trips')
         .select('id,destination,status,start_date,end_date,created_at')
-        .ilike('client_email', session.user.email)  // case-insensitive match
+        .ilike('client_email', session.user.email)
         .order('created_at', { ascending: false })
       if(error){ setError(error.message) }
       if(!error && data) setTrips(data as any)
@@ -47,7 +53,10 @@ export default function Portal(){
           <h1 className="text-3xl font-bold">Your Portal</h1>
           <p className="text-slate-600 text-sm">Signed in as {email}</p>
         </div>
-        <a className="btn btn-ghost" href="/guides">Quick Guides</a>
+        <div className="flex items-center gap-2">
+          <a className="btn btn-ghost" href="/guides">Quick Guides</a>
+          <button className="btn" onClick={signOut}>Log out</button>
+        </div>
       </header>
 
       {error && (
@@ -59,8 +68,13 @@ export default function Portal(){
 
       <div className="grid md:grid-cols-2 gap-6">
         <div className="card">
-          <h2 className="text-xl font-semibold">Trip Requests</h2>
-          <p className="text-slate-600 text-sm mb-3">Think of these like tickets. I’ll update statuses as we plan.</p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-xl font-semibold">Trip Requests</h2>
+              <p className="text-slate-600 text-sm mb-3">Think of these like tickets. I’ll update statuses as we plan.</p>
+            </div>
+            {trips.length>0 && <a href="/start" className="btn">Request another trip</a>}
+          </div>
           {trips.length===0 ? (
             <div className="min-h-[160px] flex items-center justify-center">
               <a href="/start" className="btn btn-primary">Plan a Trip</a>
