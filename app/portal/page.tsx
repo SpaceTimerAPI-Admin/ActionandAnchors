@@ -19,6 +19,7 @@ export default function Portal(){
   const [email,setEmail]=useState<string|null>(null)
   const [trips,setTrips]=useState<Trip[]>([])
   const [loading,setLoading]=useState(true)
+  const [error,setError]=useState<string|null>(null)
 
   useEffect(()=>{
     const load = async () => {
@@ -28,8 +29,9 @@ export default function Portal(){
       setEmail(session.user.email)
       const { data, error } = await supa.from('trips')
         .select('id,destination,status,start_date,end_date,created_at')
-        .eq('client_email', session.user.email)
+        .ilike('client_email', session.user.email)  // case-insensitive match
         .order('created_at', { ascending: false })
+      if(error){ setError(error.message) }
       if(!error && data) setTrips(data as any)
       setLoading(false)
     }
@@ -47,6 +49,13 @@ export default function Portal(){
         </div>
         <a className="btn btn-ghost" href="/guides">Quick Guides</a>
       </header>
+
+      {error && (
+        <div className="card border-red-200 bg-red-50 text-red-800">
+          <div className="font-semibold">Trouble loading trips</div>
+          <div className="text-sm">{error}</div>
+        </div>
+      )}
 
       <div className="grid md:grid-cols-2 gap-6">
         <div className="card">

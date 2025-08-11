@@ -1,30 +1,34 @@
 
--- Basic CRM schema
-create table if not exists clients (
+-- Clients table
+create table if not exists public.clients (
   id uuid primary key default gen_random_uuid(),
-  created_at timestamp with time zone default now(),
+  email text unique not null,
   name text,
-  email text unique,
-  phone text
+  phone text,
+  created_at timestamptz not null default now()
 );
 
-create table if not exists trips (
+-- Trips table
+create table if not exists public.trips (
   id uuid primary key default gen_random_uuid(),
-  created_at timestamp with time zone default now(),
-  client_email text references clients(email) on delete set null,
-  destination text,
+  client_email text not null,
+  destination text not null,
+  status text not null default 'lead',
   start_date date,
   end_date date,
-  supplier text,
-  status text
+  created_at timestamptz not null default now()
 );
 
-create table if not exists messages (
+create index if not exists trips_client_email_idx on public.trips (client_email);
+
+-- Messages table (for chat / notes)
+create table if not exists public.messages (
   id uuid primary key default gen_random_uuid(),
-  created_at timestamp with time zone default now(),
-  trip_id uuid references trips(id) on delete cascade,
-  channel text, -- portal|sms|email
-  direction text, -- in|out
-  body text,
-  meta jsonb
+  trip_id uuid not null,
+  sender text not null, -- 'client' | 'agent' | 'bot'
+  body text not null,
+  created_at timestamptz not null default now()
 );
+
+-- FK (optional, not enforced across schemas)
+-- alter table public.messages add constraint messages_trip_fk foreign key (trip_id) references public.trips(id) on delete cascade;

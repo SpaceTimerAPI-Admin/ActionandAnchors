@@ -4,9 +4,11 @@ import { admin } from '@/lib/server-supabase'
 
 export async function POST(req: NextRequest) {
   const form = await req.formData()
+  const emailRaw = String(form.get('email')||'').trim()
+  const email = emailRaw.toLowerCase()
   const payload = {
     name: String(form.get('name')||''),
-    email: String(form.get('email')||''),
+    email,
     phone: String(form.get('phone')||''),
     destination: String(form.get('destination')||''),
     created_at: new Date().toISOString(),
@@ -19,7 +21,6 @@ export async function POST(req: NextRequest) {
   }catch(e){
     console.error(e)
   }
-  // Build redirect using the request's origin so no env var is embedded in bundle
   const origin = req.nextUrl.origin
   const url = new URL('/login', origin)
   url.searchParams.set('email', payload.email)
