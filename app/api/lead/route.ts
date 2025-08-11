@@ -19,8 +19,9 @@ export async function POST(req: NextRequest) {
   }catch(e){
     console.error(e)
   }
-  // After submitting, send them to login to secure the portal
-  const url = new URL('/login', process.env.APP_BASE_URL || 'http://localhost:3000')
+  // Build redirect using the request's origin so no env var is embedded in bundle
+  const origin = req.nextUrl.origin
+  const url = new URL('/login', origin)
   url.searchParams.set('email', payload.email)
   return NextResponse.redirect(url)
 }

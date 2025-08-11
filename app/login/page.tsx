@@ -20,10 +20,7 @@ function LoginContent(){
   const sendMagic = async (e: React.FormEvent) => {
     e.preventDefault()
     const supa = supabaseBrowser()
-    // Use the browser's current origin so links never point to localhost in prod
-    const origin = typeof window !== 'undefined'
-      ? window.location.origin
-      : (process.env.NEXT_PUBLIC_APP_BASE_URL || process.env.APP_BASE_URL || 'https://actionandanchors.com')
+    const origin = window.location.origin   // avoid env vars in client bundle
     const { error } = await supa.auth.signInWithOtp({
       email,
       options: { emailRedirectTo: origin + '/portal' }
