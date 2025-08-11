@@ -1,3 +1,4 @@
+
 'use client'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -18,7 +19,8 @@ export default function Header(){
     <header className="w-full sticky top-0 z-50 bg-[var(--aa-bg)]/80 backdrop-blur border-b">
       <nav className="mx-auto max-w-6xl flex items-center justify-between px-4 py-3">
         <Link href="/" className="flex items-center gap-3">
-          <Image src="/logo.png" width={56} height={56} alt="Action & Anchors logo" className="rounded-md" priority />
+          {/* Logo now expected at /public/photos/logo.png */}
+          <Image src="/photos/logo.png" width={56} height={56} alt="Action & Anchors logo" className="rounded-md" priority />
           <span className="hidden sm:block text-xl font-extrabold brand-gradient">Action & Anchors</span>
         </Link>
 

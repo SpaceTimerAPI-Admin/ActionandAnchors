@@ -23,7 +23,7 @@ export default function Home(){
               Your client portal includes live park hours, wait-time insights, and an AI chat that can hand off to me anytime.
             </p>
 
-            {/* Profile welcome (now reads from /photos/anthony.jpg) */}
+            {/* Profile welcome: /public/photos/anthony.jpg */}
             <div className="flex items-center gap-4">
               <div className="relative w-24 h-24 rounded-full ring-4 ring-[#0E63C6]/20 shadow-lg overflow-hidden">
                 <Image src="/photos/anthony.jpg" alt="Anthony McHugh headshot" fill className="object-cover" priority />
@@ -40,7 +40,7 @@ export default function Home(){
             </div>
           </div>
 
-          {/* Photo collage with frames */}
+          {/* Photo collage with frames: images under /public/photos */}
           <div className="grid grid-cols-2 gap-3">
             <FramedImage src="/photos/magic-kingdom.jpg" alt="Magic Kingdom" className="h-40 sm:h-56 md:h-64" />
             <FramedImage src="/photos/diagon-alley.jpg" alt="Diagon Alley at Universal Orlando" className="h-40 sm:h-56 md:h-64" />

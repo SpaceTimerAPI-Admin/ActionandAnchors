@@ -1,0 +1,7 @@
+*** Begin Patch
+*** Update File: components/Header.tsx
+@@
+-          <Image src="/logo.png" width={56} height={56} alt="Action & Anchors logo" className="rounded-md" priority />
++          {/* Logo now expected at /public/photos/logo.png */}
++          <Image src="/photos/logo.png" width={56} height={56} alt="Action & Anchors logo" className="rounded-md" priority />
+*** End Patch
