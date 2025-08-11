@@ -1,10 +1,12 @@
 
 'use client'
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import { supabaseBrowser } from '@/lib/supabase-browser'
 
-export default function LoginPage(){
+export const dynamic = 'force-dynamic'
+
+function LoginContent(){
   const [email,setEmail]=useState('')
   const [sent,setSent]=useState(false)
   const params = useSearchParams()
@@ -18,9 +20,10 @@ export default function LoginPage(){
   const sendMagic = async (e: React.FormEvent) => {
     e.preventDefault()
     const supa = supabaseBrowser()
+    const redirectBase = (process.env.NEXT_PUBLIC_APP_BASE_URL || process.env.APP_BASE_URL || 'http://localhost:3000')
     const { error } = await supa.auth.signInWithOtp({
       email,
-      options: { emailRedirectTo: (process.env.NEXT_PUBLIC_APP_BASE_URL || process.env.APP_BASE_URL || 'http://localhost:3000') + '/portal' }
+      options: { emailRedirectTo: redirectBase + '/portal' }
     })
     if(error){ alert(error.message); return }
     setSent(true)
@@ -51,5 +54,13 @@ export default function LoginPage(){
         </div>
       </div>
     </section>
+  )
+}
+
+export default function LoginPage(){
+  return (
+    <Suspense fallback={<section className="py-16"><div className="mx-auto max-w-md px-4"><div className="card">Loading…</div></div></section>}>
+      <LoginContent />
+    </Suspense>
   )
 }
