@@ -3,8 +3,8 @@ import Link from 'next/link'
 import { Ship, Bell } from 'lucide-react'
 
 export const metadata = {
-  title: 'Royal Caribbean — Offering Soon | Action & Anchors',
-  description: 'We're adding dedicated Royal Caribbean planning features soon. Join the waitlist to be notified.',
+  title: "Royal Caribbean — Offering Soon | Action & Anchors",
+  description: "We're adding dedicated Royal Caribbean planning features soon. Join the waitlist to be notified.",
 }
 
 export default function RoyalComingSoon(){
@@ -17,7 +17,7 @@ export default function RoyalComingSoon(){
           </div>
           <h1 className="text-4xl sm:text-5xl font-black">Royal Caribbean <span className="text-slate-400 font-extrabold">— Offering Soon</span></h1>
           <p className="text-slate-700 max-w-2xl mx-auto">
-            I’m building a dedicated Royal Caribbean experience with ship tracking, day-by-day plans, dining & Wi‑Fi tips, and live help during your cruise.
+            I’m building a dedicated Royal Caribbean experience with ship tracking, day-by-day plans, dining & Wi-Fi tips, and live help during your cruise.
             Leave your info and I’ll notify you the moment it launches.
           </p>
         </header>
@@ -27,7 +27,7 @@ export default function RoyalComingSoon(){
             <h2 className="text-xl font-bold">What’s coming</h2>
             <ul className="list-disc ml-5 text-slate-700 space-y-2">
               <li>Ship & itinerary view with port days and sea days</li>
-              <li>Dining, shows, dress codes, Wi‑Fi & beverage package guidance</li>
+              <li>Dining, shows, dress codes, Wi-Fi & beverage package guidance</li>
               <li>Live trip assistant with SMS handoff to me</li>
               <li>Optional alerts: embarkation reminders, port arrival times</li>
             </ul>
