@@ -1,5 +1,7 @@
+
 import Image from 'next/image'
 import Link from 'next/link'
+import FramedImage from '@/components/FramedImage'
 
 export const metadata = {
   title: 'Action & Anchors | Disney • Universal • Royal Caribbean',
@@ -20,29 +22,30 @@ export default function Home(){
               I help families and friends plan unforgettable trips to <b>Disney</b>, <b>Universal Orlando</b>, and <b>Royal Caribbean</b>.
               Your client portal includes live park hours, wait-time insights, and an AI chat that can hand off to me anytime.
             </p>
-            <div className="flex gap-3 flex-wrap">
+
+            {/* Profile welcome */}
+            <div className="flex items-center gap-4">
+              <div className="relative w-24 h-24 rounded-full ring-4 ring-[#0E63C6]/20 shadow-lg overflow-hidden">
+                {/* Upload your photo to /public/profile/anthony.jpg */}
+                <Image src="/profile/anthony.jpg" alt="Anthony McHugh headshot" fill className="object-cover" priority />
+              </div>
+              <div>
+                <p className="font-semibold">Hey, I'm Anthony 👋</p>
+                <p className="text-slate-600 text-sm">Your Orlando & cruising trip planner. Let’s make this effortless.</p>
+              </div>
+            </div>
+
+            <div className="flex gap-3 flex-wrap pt-1">
               <Link href="#start" className="btn btn-primary">Start your trip</Link>
               <Link href="/portal" className="btn btn-ghost">Client portal</Link>
             </div>
-            <ul className="text-slate-600 grid sm:grid-cols-2 gap-2 pt-1">
-              <li>• Personalized day-by-day plans</li>
-              <li>• Dining & showtime guidance</li>
-              <li>• Live support during travel</li>
-              <li>• No planning stress</li>
-            </ul>
           </div>
 
-          {/* Photo collage (replace images in /public/photos) */}
+          {/* Photo collage with frames */}
           <div className="grid grid-cols-2 gap-3">
-            <div className="relative h-40 sm:h-56 md:h-64 rounded-xl overflow-hidden">
-              <Image src="/photos/magic-kingdom.jpg" alt="Magic Kingdom" fill className="object-cover" priority />
-            </div>
-            <div className="relative h-40 sm:h-56 md:h-64 rounded-xl overflow-hidden">
-              <Image src="/photos/diagon-alley.jpg" alt="Diagon Alley at Universal Orlando" fill className="object-cover" />
-            </div>
-            <div className="relative h-40 sm:h-56 md:h-64 rounded-xl overflow-hidden col-span-2">
-              <Image src="/photos/royal-caribbean.jpg" alt="Royal Caribbean cruise" fill className="object-cover" />
-            </div>
+            <FramedImage src="/photos/magic-kingdom.jpg" alt="Magic Kingdom" className="h-40 sm:h-56 md:h-64" />
+            <FramedImage src="/photos/diagon-alley.jpg" alt="Diagon Alley at Universal Orlando" className="h-40 sm:h-56 md:h-64" />
+            <FramedImage src="/photos/royal-caribbean.jpg" alt="Royal Caribbean cruise" className="h-40 sm:h-56 md:h-64 col-span-2" />
           </div>
         </div>
       </section>
