@@ -54,7 +54,7 @@ export default function Portal(){
           <p className="text-slate-600 text-sm mb-3">Think of these like tickets. I’ll update statuses as we plan.</p>
           {trips.length===0 ? (
             <div className="min-h-[160px] flex items-center justify-center">
-              <a href="/#start" className="btn btn-primary">Plan a Trip</a>
+              <a href="/start" className="btn btn-primary">Plan a Trip</a>
             </div>
           ) : (
             <ul className="space-y-3">
