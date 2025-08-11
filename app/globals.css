@@ -1,59 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* --- Design tokens (can be merged into your existing globals.css) --- */
 :root{
-  --aa-bg: #FFF8F1;            /* light sand */
-  --aa-text: #0F172A;          /* slate-900 */
-  --aa-primary: #0E63C6;       /* ocean blue */
+  --aa-bg: #FFF8F1;
+  --aa-text: #0F172A;
+  --aa-primary: #0E63C6;
   --aa-primary-600: #0A4B98;
-  --aa-accent: #EE5938;        /* coral / sunset */
-  --aa-accent-600: #C4462C;
-  --aa-success: #16A34A;
-  --aa-warning: #F59E0B;
-  --aa-danger: #DC2626;
-  --aa-card: #FFFFFFF2;        /* white with a touch of translucency */
-  --aa-ring: 0 0 0 3px rgba(14,99,198,0.25);
+  --aa-accent: #EE5938;
 }
-
-@media (prefers-color-scheme: dark){
-  :root{
-    --aa-bg: #0B1220;
-    --aa-text: #E5E7EB;
-    --aa-card: #0F172A;
-  }
-}
-
-html, body{ height:100%; background: var(--aa-bg); color: var(--aa-text); }
-
+body { background: var(--aa-bg); color: var(--aa-text); }
 .brand-gradient{
   background: linear-gradient(90deg, var(--aa-accent), #F39C12, var(--aa-primary));
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
-
-/* cards & surfaces */
-.card {
-  background: var(--aa-card);
-  backdrop-filter: blur(6px);
-  border-radius: 1rem;
-  box-shadow: 0 10px 30px rgba(2,6,23,0.06);
-  padding: 1.25rem;
-}
-
-/* utility */
-.section {
-  padding-block: clamp(2rem, 3vw, 4rem);
-}
-.container {
-  max-width: 1152px; margin-inline:auto; padding-inline: 1rem;
-}
-
-/* buttons */
-.btn {
-  display:inline-flex; align-items:center; gap:.5rem;
-  padding:.8rem 1rem; border-radius: .85rem; font-weight:600;
-  transition: transform .06s ease, box-shadow .2s ease;
-}
-.btn:focus { outline: none; box-shadow: var(--aa-ring); }
-.btn:active { transform: translateY(1px); }
-.btn-primary { background: var(--aa-primary); color:white; }
+.card { @apply bg-white/90 backdrop-blur rounded-2xl shadow-lg p-6; }
+.btn { @apply inline-flex items-center gap-2 px-4 py-3 rounded-xl font-semibold transition active:translate-y-px; }
+.btn-primary { @apply text-white; background: var(--aa-primary); }
 .btn-primary:hover { background: var(--aa-primary-600); }
-.btn-ghost { background: transparent; border:1px solid rgba(2,6,23,.1); }
+.btn-ghost { @apply border; }
